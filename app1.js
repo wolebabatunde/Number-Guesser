@@ -59,6 +59,8 @@ guessBtn.addEventListener('click', function () {
     if (guess === winningNum) {
         gameOver(true, `${winningNum} is correct!, YOU WIN!`, 'green');
 
+        guessInput.style.borderColor = 'green';
+
     } else {
 
         guessesLeft -= 1;
