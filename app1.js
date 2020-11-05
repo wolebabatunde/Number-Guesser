@@ -12,12 +12,12 @@
 
 let min = 1,
     max = 10,
-    winningNum = 7,
+    winningNum = getRandomNum(min, max),
     guessesLeft = 3;
 
 
 // GET UI
-const game = document.querySelector('#game'),
+const gameWrapper = document.querySelector('#game'),
     minNum = document.querySelector('.min-num'),
     maxNum = document.querySelector('.max-num'),
     guessBtn = document.querySelector('#guess-btn'),
@@ -28,6 +28,20 @@ const game = document.querySelector('#game'),
 // ASSIGN UI MIN AND MAX
 minNum.textContent = min;
 maxNum.textContent = max;
+
+
+// PLAY AGAIN EVENT LISTENER USIBG EVENT DELEGATION
+gameWrapper.addEventListener('mousedown', function (e) {
+    if (e.target.className === 'play-again') {
+
+        window.location.reload();
+
+        // guessInput.disabled = false;
+    }
+
+});
+
+
 
 // LISTEN FOR GUESS
 
@@ -70,6 +84,7 @@ guessBtn.addEventListener('click', function () {
     }
 })
 
+
 // GAME OVER FUNCTION
 
 function gameOver(won, msg) {
@@ -85,6 +100,21 @@ function gameOver(won, msg) {
     // SET MESSAGE TO CORRECT NUMBER AND CHANGE COLOR
     message.style.color = color;
     setMessage(msg);
+
+    // PLAY AGAIN
+
+    guessBtn.value = 'Play Again';
+    guessBtn.className += 'play-again';
+
+    // console.log(guessBtn);
+}
+
+// GET WINNING NUMBER
+
+function getRandomNum(min, max) {
+    return (
+        Math.floor(Math.random() * (max - min + 1) + min)
+    );
 }
 
 
